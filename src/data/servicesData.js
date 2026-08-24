@@ -100,6 +100,11 @@ export const hardwareServices = [
     desc: "High-speed Solid State Drive (SSD) upgrades and RAM memory expansions for instant speed.",
     icon: "💾",
   },
+  {
+  name: "Motherboard & Laptop Soldering",
+  desc: "Professional board-level soldering and micro-soldering repairs for laptop motherboards and other electronic components.",
+  icon: "🔧",
+},
 ];
 
 export const softwareServices = [

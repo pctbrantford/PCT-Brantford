@@ -228,8 +228,14 @@ export default function ServicesPage() {
               </Box>
             </Heading>
 
-            <Text fontSize={{ base: "16px", md: "19px" }} color="#b7c6d7" maxW="680px">
-              From broken screens and liquid spills to complex component-level board repairs and data recovery — Personal Computer Terminal has provided dependable technology service in Brantford for 30+ years.
+            <Text
+              fontSize={{ base: "16px", md: "19px" }}
+              color="#b7c6d7"
+              maxW="680px"
+            >
+              From broken screens and liquid spills to complex component-level
+              board repairs and data recovery — Personal Computer Terminal has
+              provided dependable technology service in Brantford for 30+ years.
             </Text>
 
             <Stack
@@ -271,6 +277,8 @@ export default function ServicesPage() {
                 ["#hardware-services", "Hardware Repairs"],
                 ["#software-services", "Virus & Data Recovery"],
                 ["#off-lease", "New & Off-Lease PCs"],
+                ["#soldering", "Motherboard Soldering"],
+                ["#networking", "Networking & Wi-Fi"],
               ].map(([href, label]) => (
                 <Link
                   key={label}
@@ -354,21 +362,39 @@ export default function ServicesPage() {
                       {service.title}
                     </Heading>
 
-                    <Text color="#4a5568" fontSize="15px" lineHeight="1.7" mb="14px">
+                    <Text
+                      color="#4a5568"
+                      fontSize="15px"
+                      lineHeight="1.7"
+                      mb="14px"
+                    >
                       {service.description}
                     </Text>
 
-                    <Text color="#607086" fontSize="14px" lineHeight="1.7" mb="24px">
+                    <Text
+                      color="#607086"
+                      fontSize="14px"
+                      lineHeight="1.7"
+                      mb="24px"
+                    >
                       {service.details}
                     </Text>
 
-                    <SimpleGrid columns={{ base: 1, sm: 2 }} gap="10px" mb="28px">
+                    <SimpleGrid
+                      columns={{ base: 1, sm: 2 }}
+                      gap="10px"
+                      mb="28px"
+                    >
                       {service.highlights.map((highlight) => (
                         <HStack key={highlight} align="start" gap="8px">
                           <Text color="pct.500" fontWeight="700">
                             ✓
                           </Text>
-                          <Text fontSize="13px" fontWeight="600" color="#334155">
+                          <Text
+                            fontSize="13px"
+                            fontWeight="600"
+                            color="#334155"
+                          >
                             {highlight}
                           </Text>
                         </HStack>
@@ -382,7 +408,8 @@ export default function ServicesPage() {
                         px="20px"
                         py="12px"
                       >
-                        Get Help with {service.title.split(" ")[0]} <span>→</span>
+                        Get Help with {service.title.split(" ")[0]}{" "}
+                        <span>→</span>
                       </Button>
                       <Link
                         href={businessInfo.phone.href}
@@ -462,7 +489,13 @@ export default function ServicesPage() {
       </Box>
 
       {/* Hardware Repairs Section ("At Affordable Prices") */}
-      <Box as="section" id="hardware-services" bg={navy} color="white" py={{ base: "72px", md: "100px" }}>
+      <Box
+        as="section"
+        id="hardware-services"
+        bg={navy}
+        color="white"
+        py={{ base: "72px", md: "100px" }}
+      >
         <Container maxW="1160px" px={{ base: 4, md: 5 }}>
           <Box maxW="700px" mb={{ base: "36px", md: "48px" }}>
             <Eyebrow light>Component Level &amp; Hardware</Eyebrow>
@@ -475,7 +508,9 @@ export default function ServicesPage() {
               Hardware repairs at affordable prices.
             </Heading>
             <Text color="#9eb0c2" mt="12px" fontSize="15px">
-              From power jacks and faulty chips to hinge rebuilds and thermal maintenance, our bench technicians tackle hardware faults with precision.
+              From power jacks and faulty chips to hinge rebuilds and thermal
+              maintenance, our bench technicians tackle hardware faults with
+              precision.
             </Text>
           </Box>
 
@@ -516,7 +551,12 @@ export default function ServicesPage() {
                 <Heading fontSize="18px" color="white" mb="8px">
                   {service.name}
                 </Heading>
-                <Text color="#9ab0c4" fontSize="13px" lineHeight="1.6" mb="16px">
+                <Text
+                  color="#9ab0c4"
+                  fontSize="13px"
+                  lineHeight="1.6"
+                  mb="16px"
+                >
                   {service.desc}
                 </Text>
                 <Button
@@ -538,7 +578,12 @@ export default function ServicesPage() {
       </Box>
 
       {/* Software, Optimization & Security Section ("Fast Turnaround Time") */}
-      <Box as="section" id="software-services" py={{ base: "72px", md: "100px" }} bg="#f7f9fc">
+      <Box
+        as="section"
+        id="software-services"
+        py={{ base: "72px", md: "100px" }}
+        bg="#f7f9fc"
+      >
         <Container maxW="1160px" px={{ base: 4, md: 5 }}>
           <Box maxW="700px" mb={{ base: "36px", md: "48px" }}>
             <Eyebrow>Software &amp; System Optimization</Eyebrow>
@@ -551,7 +596,8 @@ export default function ServicesPage() {
               Fast turnaround software services.
             </Heading>
             <Text color="#607086" mt="12px" fontSize="15px">
-              Slow system? Virus infection? Lost files? We clean, restore, and tune your computer for peak speed and security.
+              Slow system? Virus infection? Lost files? We clean, restore, and
+              tune your computer for peak speed and security.
             </Text>
           </Box>
 
@@ -587,7 +633,12 @@ export default function ServicesPage() {
                 <Heading fontSize="17px" color={navy} mb="6px">
                   {service.name}
                 </Heading>
-                <Text color="#607086" fontSize="12px" lineHeight="1.6" mb="14px">
+                <Text
+                  color="#607086"
+                  fontSize="12px"
+                  lineHeight="1.6"
+                  mb="14px"
+                >
                   {service.desc}
                 </Text>
                 <Button
@@ -609,7 +660,13 @@ export default function ServicesPage() {
       </Box>
 
       {/* New & Off-Lease Computers & Laptops Section */}
-      <Box as="section" id="off-lease" bg="#07111f" color="white" py={{ base: "72px", md: "90px" }}>
+      <Box
+        as="section"
+        id="off-lease"
+        bg="#07111f"
+        color="white"
+        py={{ base: "72px", md: "90px" }}
+      >
         <Container maxW="1160px" px={{ base: 4, md: 5 }}>
           <Grid
             templateColumns={{ base: "1fr", lg: "1fr 1fr" }}
@@ -628,7 +685,9 @@ export default function ServicesPage() {
                 New &amp; Off-Lease Computers &amp; Laptops
               </Heading>
               <Text color="#a3b8cc" fontSize="15px" lineHeight="1.7" mb="22px">
-                Looking for a dependable replacement laptop or workstation without paying retail markup? We offer thoroughly tested and certified systems from industry-leading manufacturers.
+                Looking for a dependable replacement laptop or workstation
+                without paying retail markup? We offer thoroughly tested and
+                certified systems from industry-leading manufacturers.
               </Text>
 
               <Box
@@ -642,7 +701,8 @@ export default function ServicesPage() {
                   ★ Special Pricing for Quantity Purchases
                 </Text>
                 <Text color="#cbd5e1" fontSize="12px" mt="4px">
-                  Bulk order pricing available for local businesses, schools, medical clinics, and offices in Brantford and Brant County.
+                  Bulk order pricing available for local businesses, schools,
+                  medical clinics, and offices in Brantford and Brant County.
                 </Text>
               </Box>
 
@@ -652,7 +712,15 @@ export default function ServicesPage() {
             </Box>
 
             <Box>
-              <Text fontFamily="heading" fontSize="13px" fontWeight="700" textTransform="uppercase" letterSpacing=".12em" color="#8297ac" mb="14px">
+              <Text
+                fontFamily="heading"
+                fontSize="13px"
+                fontWeight="700"
+                textTransform="uppercase"
+                letterSpacing=".12em"
+                color="#8297ac"
+                mb="14px"
+              >
                 Available Brands in Stock &amp; Custom Configured:
               </Text>
               <VStack align="stretch" gap="10px">
@@ -666,7 +734,12 @@ export default function ServicesPage() {
                     borderColor="#1b334d"
                     justify="space-between"
                   >
-                    <Text fontFamily="heading" fontSize="18px" fontWeight="800" color="pct.500">
+                    <Text
+                      fontFamily="heading"
+                      fontSize="18px"
+                      fontWeight="800"
+                      color="pct.500"
+                    >
                       {brand.name}
                     </Text>
                     <Text color="#8fa3b7" fontSize="12px">
@@ -681,15 +754,26 @@ export default function ServicesPage() {
       </Box>
 
       {/* 4-Step How It Works Process */}
-      <Box as="section" py={{ base: "72px", md: "90px" }} bg="white">
+      <Box
+        as="section"
+        py={{ base: "72px", md: "90px" }}
+        bg="white"
+        id="how-it-works"
+      >
         <Container maxW="1160px" px={{ base: 4, md: 5 }}>
-          <Box textAlign="center" maxW="600px" mx="auto" mb={{ base: "36px", md: "48px" }}>
+          <Box
+            textAlign="center"
+            maxW="600px"
+            mx="auto"
+            mb={{ base: "36px", md: "48px" }}
+          >
             <Eyebrow>Simple &amp; Transparent</Eyebrow>
             <Heading fontSize={{ base: "32px", md: "42px" }} mt="8px">
               How our repair process works
             </Heading>
             <Text color="#607086" fontSize="14px" mt="10px">
-              No technical jargon or surprise invoices. Clear communication at every step.
+              No technical jargon or surprise invoices. Clear communication at
+              every step.
             </Text>
           </Box>
 
@@ -720,7 +804,12 @@ export default function ServicesPage() {
                 border="1px solid"
                 borderColor="#e2e8f0"
               >
-                <Text color="pct.700" fontFamily="heading" fontWeight="800" fontSize="18px">
+                <Text
+                  color="pct.700"
+                  fontFamily="heading"
+                  fontWeight="800"
+                  fontSize="18px"
+                >
                   0{index + 1}
                 </Text>
                 <Heading fontSize="18px" color={navy} mt="12px" mb="8px">
@@ -734,6 +823,244 @@ export default function ServicesPage() {
           </SimpleGrid>
         </Container>
       </Box>
+
+      {/* Motherboard & Laptop Soldering Section */}
+      <Box
+        as="section"
+        id="soldering"
+        bg="#07111f"
+        color="white"
+        py={{ base: "72px", md: "90px" }}
+      >
+        <Container maxW="1160px" px={{ base: 4, md: 5 }}>
+          <Grid
+            templateColumns={{ base: "1fr", lg: "1fr 1fr" }}
+            gap={{ base: "36px", lg: "60px" }}
+            alignItems="center"
+          >
+            <Box>
+              <Text
+                fontFamily="heading"
+                fontSize="13px"
+                fontWeight="700"
+                textTransform="uppercase"
+                letterSpacing=".12em"
+                color="#8297ac"
+                mb="14px"
+              >
+                Soldering &amp; Board-Level Services:
+              </Text>
+
+              <VStack align="stretch" gap="10px">
+                {[
+                  {
+                    name: "Charging Port Repair",
+                    desc: "Repair and replacement of damaged or loose charging ports.",
+                  },
+                  {
+                    name: "Component Replacement",
+                    desc: "Precision soldering for damaged motherboard components.",
+                  },
+                  {
+                    name: "Connector & Jack Repair",
+                    desc: "Repair of damaged USB, HDMI, audio, and other connectors.",
+                  },
+                  {
+                    name: "Trace & Pad Repair",
+                    desc: "Restore damaged PCB traces and solder pads where possible.",
+                  },
+                  {
+                    name: "Laptop Motherboard Repair",
+                    desc: "Board-level diagnosis and soldering for laptop motherboard issues.",
+                  },
+                ].map((service) => (
+                  <HStack
+                    key={service.name}
+                    p="16px 20px"
+                    bg="#0e1f32"
+                    borderRadius="14px"
+                    border="1px solid"
+                    borderColor="#1b334d"
+                    justify="space-between"
+                    align="center"
+                    gap="20px"
+                  >
+                    <Text
+                      fontFamily="heading"
+                      fontSize="16px"
+                      fontWeight="800"
+                      color="pct.500"
+                      minW="max-content"
+                    >
+                      {service.name}
+                    </Text>
+
+                    <Text color="#8fa3b7" fontSize="12px" textAlign="right">
+                      {service.desc}
+                    </Text>
+                  </HStack>
+                ))}
+              </VStack>
+            </Box>
+            <Box>
+              <Eyebrow light>Board-Level Repair &amp; Soldering</Eyebrow>
+
+              <Heading
+                fontSize={{ base: "34px", md: "46px" }}
+                letterSpacing="-.04em"
+                lineHeight="1.1"
+                my="14px"
+                color="white"
+              >
+                Motherboard &amp; Laptop Soldering
+              </Heading>
+
+              <Text color="#a3b8cc" fontSize="15px" lineHeight="1.7" mb="22px">
+                Precision soldering and board-level repairs for laptops,
+                motherboards, and electronic components. We repair damaged
+                connections, replace faulty components, and restore boards that
+                may otherwise require costly replacement.
+              </Text>
+
+              <Box
+                p="18px 22px"
+                borderRadius="14px"
+                bg="rgba(37,199,167,0.1)"
+                border="1px solid rgba(37,199,167,0.3)"
+                mb="28px"
+              >
+                <Text color="pct.400" fontWeight="700" fontSize="14px">
+                  ★ Precision Board-Level Repairs
+                </Text>
+
+                <Text color="#cbd5e1" fontSize="12px" mt="4px">
+                  Professional soldering services for damaged connectors,
+                  charging ports, components, traces, and other motherboard
+                  issues.
+                </Text>
+              </Box>
+
+              <ActionLink href="#contact">
+                Ask About a Repair <span>→</span>
+              </ActionLink>
+            </Box>
+          </Grid>
+        </Container>
+      </Box>
+
+      {/* Networking & Wi-Fi Services */}
+<Box
+  as="section"
+  py={{ base: "72px", md: "90px" }}
+  bg="white"
+  id="networking"
+>
+  <Container maxW="1160px" px={{ base: 4, md: 5 }}>
+    <Grid
+      templateColumns={{ base: "1fr", lg: "0.85fr 1.15fr" }}
+      gap={{ base: "36px", lg: "70px" }}
+      alignItems="center"
+    >
+      {/* Left Content */}
+      <Box>
+        <Eyebrow>Connectivity &amp; Network Support</Eyebrow>
+
+        <Heading
+          fontSize={{ base: "32px", md: "42px" }}
+          mt="8px"
+          lineHeight="1.15"
+        >
+          Networking &amp; Wi-Fi Services
+        </Heading>
+
+        <Text
+          color="#607086"
+          fontSize="14px"
+          mt="14px"
+          lineHeight="1.7"
+        >
+          Having trouble staying connected? We diagnose and resolve
+          networking issues for homes, offices, and small businesses.
+        </Text>
+
+        <Text
+          color="#607086"
+          fontSize="14px"
+          mt="10px"
+          lineHeight="1.7"
+        >
+          From slow Wi-Fi to router configuration and device connectivity,
+          we'll help get your network working reliably.
+        </Text>
+      </Box>
+
+      {/* Services List */}
+      <Box>
+        {[
+          [
+            "Wi-Fi Troubleshooting",
+            "Slow speeds, dropped connections, weak signals, and unstable Wi-Fi.",
+          ],
+          [
+            "Router & Network Setup",
+            "Router configuration, wireless setup, passwords, and connected devices.",
+          ],
+          [
+            "Home & Office Networking",
+            "Connect computers, printers, and other devices across your network.",
+          ],
+          [
+            "Network Diagnostics",
+            "Find and resolve connection, configuration, and device communication issues.",
+          ],
+        ].map(([title, copy], index) => (
+          <HStack
+            key={title}
+            align="flex-start"
+            gap="18px"
+            py="20px"
+            borderBottom={
+              index !== 3 ? "1px solid #e2e8f0" : "none"
+            }
+          >
+            <Flex
+              flexShrink={0}
+              w="32px"
+              h="32px"
+              borderRadius="full"
+              bg="pct.50"
+              color="pct.700"
+              align="center"
+              justify="center"
+              fontWeight="800"
+              fontSize="14px"
+            >
+              ✓
+            </Flex>
+
+            <Box>
+              <Heading
+                fontSize="17px"
+                color={navy}
+                mb="5px"
+              >
+                {title}
+              </Heading>
+
+              <Text
+                color="#64748b"
+                fontSize="13px"
+                lineHeight="1.6"
+              >
+                {copy}
+              </Text>
+            </Box>
+          </HStack>
+        ))}
+      </Box>
+    </Grid>
+  </Container>
+</Box>
 
       {/* Contact & Repair Booking Section */}
       <Box
@@ -760,7 +1087,9 @@ export default function ServicesPage() {
                 Request a repair or service quote.
               </Heading>
               <Text color="#9eb0c2" mt="15px">
-                Fill out the request form and our technicians will follow up promptly. For immediate drop-off or urgent inquiries, give our Brantford shop a call directly.
+                Fill out the request form and our technicians will follow up
+                promptly. For immediate drop-off or urgent inquiries, give our
+                Brantford shop a call directly.
               </Text>
               <VStack align="stretch" gap="13px" mt="32px">
                 <ContactDetail
@@ -823,15 +1152,33 @@ export default function ServicesPage() {
                   p="12px 13px"
                 >
                   <option value="">Select a service category</option>
-                  <option value="Broken Screen Repair">Broken Screen / LCD Replacement</option>
-                  <option value="Keyboard Replacement">Keyboard Replacement / Key Repair</option>
-                  <option value="Laptop Liquid Spill">Laptop Liquid Spill Recovery</option>
-                  <option value="No Power / DC Jack">No Power / Charging Port / DC Jack</option>
-                  <option value="Virus & Spyware Removal">Virus, Spyware & Malware Removal</option>
-                  <option value="Data Recovery & Transfer">Data Recovery & Data Transfers</option>
-                  <option value="Hardware Upgrades / SSD">Hardware Upgrades (SSD, RAM, Battery)</option>
-                  <option value="Custom Gaming PC">Custom Gaming PC / Workstation</option>
-                  <option value="Business IT Support">Business IT Support & Networking</option>
+                  <option value="Broken Screen Repair">
+                    Broken Screen / LCD Replacement
+                  </option>
+                  <option value="Keyboard Replacement">
+                    Keyboard Replacement / Key Repair
+                  </option>
+                  <option value="Laptop Liquid Spill">
+                    Laptop Liquid Spill Recovery
+                  </option>
+                  <option value="No Power / DC Jack">
+                    No Power / Charging Port / DC Jack
+                  </option>
+                  <option value="Virus & Spyware Removal">
+                    Virus, Spyware & Malware Removal
+                  </option>
+                  <option value="Data Recovery & Transfer">
+                    Data Recovery & Data Transfers
+                  </option>
+                  <option value="Hardware Upgrades / SSD">
+                    Hardware Upgrades (SSD, RAM, Battery)
+                  </option>
+                  <option value="Custom Gaming PC">
+                    Custom Gaming PC / Workstation
+                  </option>
+                  <option value="Business IT Support">
+                    Business IT Support & Networking
+                  </option>
                   <option value="Other Service">Other Computer Inquiry</option>
                 </Box>
               </Field>
@@ -859,7 +1206,8 @@ export default function ServicesPage() {
                   fontSize="13px"
                   fontWeight="600"
                 >
-                  ✓ Thanks! Your repair request has been submitted. Our team will contact you shortly.
+                  ✓ Thanks! Your repair request has been submitted. Our team
+                  will contact you shortly.
                 </Box>
               )}
             </Box>
