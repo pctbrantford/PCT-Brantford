@@ -6,6 +6,8 @@ import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
 import ServicesPage from "./pages/ServicesPage";
 import AboutPage from "./pages/AboutPage";
+import TermsPage from "./pages/TermsPage";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 const navy = "#07111f";
 
@@ -32,7 +34,14 @@ export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <Box color={navy} bg="white" lineHeight="1.6" minH="100vh" display="flex" flexDirection="column">
+      <Box
+        color={navy}
+        bg="white"
+        lineHeight="1.6"
+        minH="100vh"
+        display="flex"
+        flexDirection="column"
+      >
         <Header />
         <Box flex="1">
           <Routes>
@@ -40,6 +49,8 @@ export default function App() {
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="*" element={<HomePage />} />
+            <Route path="/terms-and-conditions" element={<TermsPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           </Routes>
         </Box>
         <Footer />

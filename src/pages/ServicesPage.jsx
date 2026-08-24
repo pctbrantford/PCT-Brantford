@@ -191,7 +191,7 @@ export default function ServicesPage() {
         <Container maxW="1160px" px={{ base: 4, md: 5 }}>
           <Box maxW="820px">
             <HStack gap="8px" mb="14px" fontSize="13px" color="#8ea1b2">
-              <Link href="/" _hover={{ color: "pct.400" }}>
+              <Link href="/" _hover={{ color: "pct.400" }} color="white">
                 Home
               </Link>
               <Text>/</Text>
@@ -949,118 +949,98 @@ export default function ServicesPage() {
       </Box>
 
       {/* Networking & Wi-Fi Services */}
-<Box
-  as="section"
-  py={{ base: "72px", md: "90px" }}
-  bg="white"
-  id="networking"
->
-  <Container maxW="1160px" px={{ base: 4, md: 5 }}>
-    <Grid
-      templateColumns={{ base: "1fr", lg: "0.85fr 1.15fr" }}
-      gap={{ base: "36px", lg: "70px" }}
-      alignItems="center"
-    >
-      {/* Left Content */}
-      <Box>
-        <Eyebrow>Connectivity &amp; Network Support</Eyebrow>
-
-        <Heading
-          fontSize={{ base: "32px", md: "42px" }}
-          mt="8px"
-          lineHeight="1.15"
-        >
-          Networking &amp; Wi-Fi Services
-        </Heading>
-
-        <Text
-          color="#607086"
-          fontSize="14px"
-          mt="14px"
-          lineHeight="1.7"
-        >
-          Having trouble staying connected? We diagnose and resolve
-          networking issues for homes, offices, and small businesses.
-        </Text>
-
-        <Text
-          color="#607086"
-          fontSize="14px"
-          mt="10px"
-          lineHeight="1.7"
-        >
-          From slow Wi-Fi to router configuration and device connectivity,
-          we'll help get your network working reliably.
-        </Text>
-      </Box>
-
-      {/* Services List */}
-      <Box>
-        {[
-          [
-            "Wi-Fi Troubleshooting",
-            "Slow speeds, dropped connections, weak signals, and unstable Wi-Fi.",
-          ],
-          [
-            "Router & Network Setup",
-            "Router configuration, wireless setup, passwords, and connected devices.",
-          ],
-          [
-            "Home & Office Networking",
-            "Connect computers, printers, and other devices across your network.",
-          ],
-          [
-            "Network Diagnostics",
-            "Find and resolve connection, configuration, and device communication issues.",
-          ],
-        ].map(([title, copy], index) => (
-          <HStack
-            key={title}
-            align="flex-start"
-            gap="18px"
-            py="20px"
-            borderBottom={
-              index !== 3 ? "1px solid #e2e8f0" : "none"
-            }
+      <Box
+        as="section"
+        py={{ base: "72px", md: "90px" }}
+        bg="white"
+        id="networking"
+      >
+        <Container maxW="1160px" px={{ base: 4, md: 5 }}>
+          <Grid
+            templateColumns={{ base: "1fr", lg: "0.85fr 1.15fr" }}
+            gap={{ base: "36px", lg: "70px" }}
+            alignItems="center"
           >
-            <Flex
-              flexShrink={0}
-              w="32px"
-              h="32px"
-              borderRadius="full"
-              bg="pct.50"
-              color="pct.700"
-              align="center"
-              justify="center"
-              fontWeight="800"
-              fontSize="14px"
-            >
-              ✓
-            </Flex>
-
+            {/* Left Content */}
             <Box>
+              <Eyebrow>Connectivity &amp; Network Support</Eyebrow>
+
               <Heading
-                fontSize="17px"
-                color={navy}
-                mb="5px"
+                fontSize={{ base: "32px", md: "42px" }}
+                mt="8px"
+                lineHeight="1.15"
               >
-                {title}
+                Networking &amp; Wi-Fi Services
               </Heading>
 
-              <Text
-                color="#64748b"
-                fontSize="13px"
-                lineHeight="1.6"
-              >
-                {copy}
+              <Text color="#607086" fontSize="14px" mt="14px" lineHeight="1.7">
+                Having trouble staying connected? We diagnose and resolve
+                networking issues for homes, offices, and small businesses.
+              </Text>
+
+              <Text color="#607086" fontSize="14px" mt="10px" lineHeight="1.7">
+                From slow Wi-Fi to router configuration and device connectivity,
+                we'll help get your network working reliably.
               </Text>
             </Box>
-          </HStack>
-        ))}
+
+            {/* Services List */}
+            <Box>
+              {[
+                [
+                  "Wi-Fi Troubleshooting",
+                  "Slow speeds, dropped connections, weak signals, and unstable Wi-Fi.",
+                ],
+                [
+                  "Router & Network Setup",
+                  "Router configuration, wireless setup, passwords, and connected devices.",
+                ],
+                [
+                  "Home & Office Networking",
+                  "Connect computers, printers, and other devices across your network.",
+                ],
+                [
+                  "Network Diagnostics",
+                  "Find and resolve connection, configuration, and device communication issues.",
+                ],
+              ].map(([title, copy], index) => (
+                <HStack
+                  key={title}
+                  align="flex-start"
+                  gap="18px"
+                  py="20px"
+                  borderBottom={index !== 3 ? "1px solid #e2e8f0" : "none"}
+                >
+                  <Flex
+                    flexShrink={0}
+                    w="32px"
+                    h="32px"
+                    borderRadius="full"
+                    bg="pct.50"
+                    color="pct.700"
+                    align="center"
+                    justify="center"
+                    fontWeight="800"
+                    fontSize="14px"
+                  >
+                    ✓
+                  </Flex>
+
+                  <Box>
+                    <Heading fontSize="17px" color={navy} mb="5px">
+                      {title}
+                    </Heading>
+
+                    <Text color="#64748b" fontSize="13px" lineHeight="1.6">
+                      {copy}
+                    </Text>
+                  </Box>
+                </HStack>
+              ))}
+            </Box>
+          </Grid>
+        </Container>
       </Box>
-    </Grid>
-  </Container>
-</Box>
 
       {/* Contact & Repair Booking Section */}
       <Box

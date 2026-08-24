@@ -183,15 +183,15 @@ function ImageCarousel({ images }) {
 
   return (
     <Box
-      position="relative"
-      w="100%"
-      w={{
-        base: "100%",
-        md: "calc(100% - 40px)",
-        lg: "calc(100% - 80px)",
-      }}
-      mx="auto"
-      my={"16px"}
+   position="relative"
+  w={{
+    base: "calc(100% - 32px)",
+    sm: "calc(100% - 32px)",
+    md: "calc(100% - 40px)",
+    lg: "calc(100% - 80px)",
+  }}
+  mx="auto"
+  my="16px"
     >
       {/* Main image */}
       <Box
@@ -398,7 +398,7 @@ export default function AboutPage() {
         <Container maxW="1160px" px={{ base: 4, md: 5 }}>
           <Box maxW="820px">
             <HStack gap="8px" mb="14px" fontSize="13px" color="#8ea1b2">
-              <Link href="/" _hover={{ color: "pct.400" }}>
+              <Link href="/" _hover={{ color: "pct.400" }} color="white">
                 Home
               </Link>
               <Text>/</Text>
