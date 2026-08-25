@@ -34,8 +34,8 @@ for (const url of routesToPrerender) {
 
   let bodyContent = appHtml;
 
-  // Extract head tags (title, meta, link, script) if they were rendered at top of appHtml
-  const headTagsMatch = appHtml.match(/^((?:<(?:title|meta|link)[^>]*>)*(?:<script[^>]*>[\s\S]*?<\/script>)*)([\s\S]*)$/i);
+  // Extract complete head tags (<title>...</title>, <meta.../>, <link.../>, <script>...</script>) from top of appHtml
+  const headTagsMatch = appHtml.match(/^((?:<title[\s\S]*?<\/title>|<meta[^>]*\/?>|<link[^>]*\/?>|<script[^>]*>[\s\S]*?<\/script>)*)([\s\S]*)$/i);
   if (headTagsMatch && headTagsMatch[1]) {
     const extractedHead = headTagsMatch[1];
     bodyContent = headTagsMatch[2];
