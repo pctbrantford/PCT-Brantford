@@ -71,9 +71,9 @@ function Layout() {
   );
 }
 
-export default function App() {
+export function AppRoutes() {
   return (
-    <BrowserRouter>
+    <>
       <ScrollToTop />
 
       <Box
@@ -97,6 +97,15 @@ export default function App() {
           </Route>
         </Routes>
       </Box>
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppRoutes />
     </BrowserRouter>
   );
 }
+
