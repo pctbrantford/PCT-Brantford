@@ -1,13 +1,24 @@
 import { useEffect } from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Outlet,
+  useLocation,
+} from "react-router-dom";
 import { Box } from "@chakra-ui/react";
+
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+
 import HomePage from "./pages/HomePage";
 import ServicesPage from "./pages/ServicesPage";
 import AboutPage from "./pages/AboutPage";
 import TermsPage from "./pages/TermsPage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import ContactPage from "./pages/ContactPage";
+
+import PageTransition from "./components/PageTransition";
 
 const navy = "#07111f";
 
@@ -17,23 +28,54 @@ function ScrollToTop() {
   useEffect(() => {
     if (hash) {
       const element = document.getElementById(hash.replace("#", ""));
+
       if (element) {
         setTimeout(() => {
-          element.scrollIntoView({ behavior: "smooth" });
+          element.scrollIntoView({
+            behavior: "smooth",
+          });
         }, 100);
       }
     } else {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     }
   }, [pathname, hash]);
 
   return null;
 }
 
+function Layout() {
+  const location = useLocation();
+
+  const isHomeSection = location.pathname === "/" && location.hash !== "";
+
+  return (
+    <>
+      <Header />
+
+      <Box flex="1">
+        {isHomeSection ? (
+          <Outlet />
+        ) : (
+          <PageTransition key={location.pathname}>
+            <Outlet />
+          </PageTransition>
+        )}
+      </Box>
+
+      <Footer />
+    </>
+  );
+}
+
 export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+
       <Box
         color={navy}
         bg="white"
@@ -42,18 +84,18 @@ export default function App() {
         display="flex"
         flexDirection="column"
       >
-        <Header />
-        <Box flex="1">
-          <Routes>
+        <Routes>
+          <Route element={<Layout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/about" element={<AboutPage />} />
-            <Route path="*" element={<HomePage />} />
             <Route path="/terms-and-conditions" element={<TermsPage />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          </Routes>
-        </Box>
-        <Footer />
+            <Route path="/contact" element={<ContactPage />} />
+
+            <Route path="*" element={<HomePage />} />
+          </Route>
+        </Routes>
       </Box>
     </BrowserRouter>
   );

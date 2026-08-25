@@ -1,3 +1,4 @@
+import SEO from "../components/SEO";
 import { useState } from "react";
 import {
   Box,
@@ -22,6 +23,7 @@ import {
   computerBrands,
 } from "../data/servicesData";
 import { businessInfo } from "../constants";
+import { useNavigate } from "react-router-dom";
 
 const navy = "#07111f";
 const mint = "#25c7a7";
@@ -65,7 +67,7 @@ function Eyebrow({ children, light = false }) {
 
 function ActionLink({
   children,
-  href = "#contact",
+  href = "/contact",
   outline = false,
   small = false,
   ...props
@@ -164,6 +166,7 @@ function ContactDetail({ icon, label, value, href }) {
 export default function ServicesPage() {
   const [submitted, setSubmitted] = useState(false);
   const [selectedService, setSelectedService] = useState("");
+  const navigate = useNavigate();
 
   const submitForm = (event) => {
     event.preventDefault();
@@ -180,7 +183,15 @@ export default function ServicesPage() {
   };
 
   return (
-    <Box>
+    <>
+     {/* SEO Section */}
+      <SEO
+        title="Computer Repair Services Brantford | PCT"
+        description="Computer and laptop repair services in Brantford including screen repair, keyboard replacement, hardware repairs, data recovery, motherboard soldering and networking."
+        canonical="/services"
+      />
+       <Box>
+     
       {/* Services Hero Section */}
       <Box
         as="section"
@@ -243,7 +254,7 @@ export default function ServicesPage() {
               gap="14px"
               mt="32px"
             >
-              <ActionLink href="#contact">
+              <ActionLink href="/contact">
                 Book a Repair <span>→</span>
               </ActionLink>
               <ActionLink href={businessInfo.phone.href} outline>
@@ -299,7 +310,31 @@ export default function ServicesPage() {
                     transform: "translateY(-1px)",
                     textDecoration: "none",
                   }}
+                  _active={{
+                    bg: navy,
+                    color: "white",
+                    borderColor: navy,
+                    transform: "scale(0.94)",
+                    textDecoration: "none",
+                  }}
                   transition="all 0.2s ease"
+                  onClick={(e) => {
+                    if (window.innerWidth < 768) {
+                      e.preventDefault();
+
+                      const target = document.querySelector(href);
+
+                      if (target) {
+                        // Small delay lets the tap animation be visible
+                        setTimeout(() => {
+                          target.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start",
+                          });
+                        }, 120);
+                      }
+                    }
+                  }}
                 >
                   {label}
                 </Link>
@@ -404,7 +439,7 @@ export default function ServicesPage() {
                     <HStack gap="12px" wrap="wrap">
                       <Button
                         {...buttonStyle}
-                        onClick={() => handleServiceSelect(service.title)}
+                        onClick={() => navigate("/contact")}
                         px="20px"
                         py="12px"
                       >
@@ -566,7 +601,7 @@ export default function ServicesPage() {
                   fontSize="13px"
                   fontWeight="700"
                   cursor="pointer"
-                  onClick={() => handleServiceSelect(service.name)}
+                  onClick={() => navigate("/contact")}
                   _hover={{ color: "white" }}
                 >
                   Request Quote →
@@ -648,7 +683,7 @@ export default function ServicesPage() {
                   fontSize="12px"
                   fontWeight="700"
                   cursor="pointer"
-                  onClick={() => handleServiceSelect(service.name)}
+                  onClick={() => navigate("/contact")}
                   _hover={{ color: navy }}
                 >
                   Book Service →
@@ -706,7 +741,7 @@ export default function ServicesPage() {
                 </Text>
               </Box>
 
-              <ActionLink href="#contact">
+              <ActionLink href="/contact">
                 Check Current Inventory <span>→</span>
               </ActionLink>
             </Box>
@@ -940,7 +975,7 @@ export default function ServicesPage() {
                 </Text>
               </Box>
 
-              <ActionLink href="#contact">
+              <ActionLink href="/contact">
                 Ask About a Repair <span>→</span>
               </ActionLink>
             </Box>
@@ -1041,159 +1076,8 @@ export default function ServicesPage() {
           </Grid>
         </Container>
       </Box>
-
-      {/* Contact & Repair Booking Section */}
-      <Box
-        as="section"
-        id="contact"
-        bg={navy}
-        color="white"
-        py={{ base: "72px", md: "100px" }}
-      >
-        <Container maxW="1160px" px={{ base: 4, md: 5 }}>
-          <Grid
-            templateColumns={{ base: "1fr", lg: ".85fr 1.15fr" }}
-            gap={{ base: "44px", lg: "90px" }}
-          >
-            <Box>
-              <Eyebrow light>Get In Touch</Eyebrow>
-              <Heading
-                fontSize={{ base: "38px", md: "52px" }}
-                letterSpacing="-.05em"
-                lineHeight="1.1"
-                mt="12px"
-                color="white"
-              >
-                Request a repair or service quote.
-              </Heading>
-              <Text color="#9eb0c2" mt="15px">
-                Fill out the request form and our technicians will follow up
-                promptly. For immediate drop-off or urgent inquiries, give our
-                Brantford shop a call directly.
-              </Text>
-              <VStack align="stretch" gap="13px" mt="32px">
-                <ContactDetail
-                  icon="☎"
-                  label="Call"
-                  value={businessInfo.phone.display}
-                  href={businessInfo.phone.href}
-                />
-                <ContactDetail
-                  icon="✉"
-                  label="Email"
-                  value={businessInfo.email.display}
-                  href={businessInfo.email.href}
-                />
-                <ContactDetail
-                  icon="⌖"
-                  label="Visit Our Shop"
-                  value={businessInfo.address.full}
-                  href={businessInfo.mapHref}
-                />
-              </VStack>
-            </Box>
-
-            <Box
-              as="form"
-              onSubmit={submitForm}
-              bg="white"
-              color={navy}
-              p={{ base: "20px", md: "28px" }}
-              borderRadius="24px"
-            >
-              <SimpleGrid columns={{ base: 1, sm: 2 }} gap="14px">
-                <Field label="First name">
-                  <Input name="firstName" required />
-                </Field>
-                <Field label="Last name">
-                  <Input name="lastName" required />
-                </Field>
-                <Field label="Phone">
-                  <Input type="tel" name="phone" required />
-                </Field>
-                <Field label="Email">
-                  <Input type="email" name="email" required />
-                </Field>
-              </SimpleGrid>
-
-              <Field label="What service do you need?">
-                <Box
-                  as="select"
-                  name="service"
-                  value={selectedService}
-                  onChange={(e) => setSelectedService(e.target.value)}
-                  required
-                  w="full"
-                  mt="6px"
-                  border="1px solid"
-                  borderColor="#d9e2eb"
-                  bg="#f9fbfd"
-                  borderRadius="10px"
-                  p="12px 13px"
-                >
-                  <option value="">Select a service category</option>
-                  <option value="Broken Screen Repair">
-                    Broken Screen / LCD Replacement
-                  </option>
-                  <option value="Keyboard Replacement">
-                    Keyboard Replacement / Key Repair
-                  </option>
-                  <option value="Laptop Liquid Spill">
-                    Laptop Liquid Spill Recovery
-                  </option>
-                  <option value="No Power / DC Jack">
-                    No Power / Charging Port / DC Jack
-                  </option>
-                  <option value="Virus & Spyware Removal">
-                    Virus, Spyware & Malware Removal
-                  </option>
-                  <option value="Data Recovery & Transfer">
-                    Data Recovery & Data Transfers
-                  </option>
-                  <option value="Hardware Upgrades / SSD">
-                    Hardware Upgrades (SSD, RAM, Battery)
-                  </option>
-                  <option value="Custom Gaming PC">
-                    Custom Gaming PC / Workstation
-                  </option>
-                  <option value="Business IT Support">
-                    Business IT Support & Networking
-                  </option>
-                  <option value="Other Service">Other Computer Inquiry</option>
-                </Box>
-              </Field>
-
-              <Field label="Describe the issue or device model">
-                <Textarea
-                  name="message"
-                  rows="4"
-                  required
-                  placeholder="Example: Dell Inspiron laptop screen cracked after a drop, need replacement estimate..."
-                />
-              </Field>
-
-              <Button type="submit" {...buttonStyle} w="full">
-                Submit Repair Request <span>→</span>
-              </Button>
-
-              {submitted && (
-                <Box
-                  mt="12px"
-                  p="12px"
-                  borderRadius="10px"
-                  bg="#e6fbf6"
-                  color="pct.700"
-                  fontSize="13px"
-                  fontWeight="600"
-                >
-                  ✓ Thanks! Your repair request has been submitted. Our team
-                  will contact you shortly.
-                </Box>
-              )}
-            </Box>
-          </Grid>
-        </Container>
-      </Box>
     </Box>
+      </>
+   
   );
 }

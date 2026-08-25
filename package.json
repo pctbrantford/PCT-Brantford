@@ -12,8 +12,10 @@
     "@chakra-ui/react": "^3.36.1",
     "@emotion/react": "^11.14.0",
     "@vitejs/plugin-react": "latest",
+    "motion": "^13.1.1",
     "react": "latest",
     "react-dom": "latest",
+    "react-helmet-async": "^3.0.0",
     "react-router-dom": "^7.18.2",
     "vite": "latest"
   }

@@ -36,11 +36,7 @@ export default function Footer() {
   return (
     <Box as="footer" bg="#050d16" color="#d8e2ec" pt="70px">
       <Container maxW="1160px" px={{ base: 4, md: 5 }}>
-        <SimpleGrid
-          columns={{ base: 1, sm: 2, lg: 4 }}
-          gap="40px"
-          pb="55px"
-        >
+        <SimpleGrid columns={{ base: 1, sm: 2, lg: 4 }} gap="40px" pb="55px">
           {/* Brand */}
           <Box>
             <Link href="/">
@@ -83,7 +79,7 @@ export default function Footer() {
               ["About PCT", "/about"],
               ["How It Works", "/services#how-it-works"],
               ["FAQ", "/services#faq"],
-              ["Contact Us", "/services#contact"],
+              ["Contact Us", "/contact"],
               ["Terms & Conditions", "/terms-and-conditions"],
               ["Privacy Policy", "/privacy-policy"],
             ]}
@@ -142,23 +138,27 @@ export default function Footer() {
         </SimpleGrid>
 
         {/* Bottom Bar */}
-        <Box
-          borderTop="1px solid"
-          borderColor="#1b2938"
-          py="18px"
-        >
+        <Box borderTop="1px solid" borderColor="#1b2938" py="18px">
           <HStack
             justify="space-between"
             align="center"
             gap="20px"
             flexWrap="wrap"
+            w="100%"
           >
+            {/* Copyright */}
             <Text color="#66788b" fontSize="11px">
               © {new Date().getFullYear()} {businessInfo.name}. All rights
               reserved.
             </Text>
 
-            <HStack gap="16px">
+            {/* Links + Maple */}
+            <HStack
+              gap="16px"
+              ml={{ base: "0", md: "auto" }}
+              justify={{ base: "flex-start", md: "flex-end" }}
+              w={{ base: "100%", md: "auto" }}
+            >
               <Link
                 href="/privacy-policy"
                 color="#66788b"
@@ -177,7 +177,9 @@ export default function Footer() {
                 Terms &amp; Conditions
               </Link>
 
-              <Text fontSize="14px">🍁</Text>
+              <Text fontSize="14px" ml={{ base: "auto", md: "0" }}>
+                🍁
+              </Text>
             </HStack>
           </HStack>
         </Box>

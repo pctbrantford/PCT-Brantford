@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
@@ -67,7 +68,7 @@ export function Brand({ bg = false }) {
 
 export function ActionLink({
   children,
-  href = "#contact",
+  href = "/contact",
   outline = false,
   small = false,
   ...props
@@ -119,18 +120,94 @@ const navItems = [
   ["/#process", "How It Works"],
   ["/#store", "Store"],
   ["/#faq", "FAQ"],
-  ["#contact", "Contact"],
+  ["/contact", "Contact"],
 ];
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const closeMenu = () => setMenuOpen(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
+  const isPathActive = (href) => {
+    const [path, hash] = href.split("#");
+
+    // Section links: /#process, /#store, /#faq
+    if (hash) {
+      return location.pathname === path && location.hash === `#${hash}`;
+    }
+
+    // Home
+    if (href === "/") {
+      return location.pathname === "/" && location.hash === "";
+    }
+
+    // Other pages
+    return location.pathname === path;
+  };
+
+  const handleNavigation = (href) => {
+    const [path, hash] = href.split("#");
+
+    // HOME
+    if (href === "/") {
+      if (location.pathname === "/") {
+        navigate("/", { replace: true });
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      } else {
+        navigate("/");
+      }
+
+      return;
+    }
+
+    // HOME PAGE SECTION
+    if (hash && location.pathname === path) {
+      // Update React Router location/hash
+      navigate(`/#${hash}`, { replace: true });
+
+      // Wait for the URL/location update, then scroll
+      setTimeout(() => {
+        const section = document.getElementById(hash);
+
+        if (section) {
+          section.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      }, 50);
+
+      return;
+    }
+
+    // NORMAL PAGE
+    if (!hash && location.pathname === path) {
+      return;
+    }
+
+    navigate(href);
+  };
   return (
     <>
-      <Box bg="#06101d" color="#b8c8d9" fontSize="13px" py={{ base: "7px", sm: "0" }}>
+      <Box
+        bg="#06101d"
+        color="#b8c8d9"
+        fontSize="13px"
+        py={{ base: "7px", sm: "0" }}
+      >
         <Container maxW="1160px" px={{ base: 4, md: 5 }}>
-          <Flex minH={{ base: "auto", sm: "35px" }} justify="space-between" align="center" wrap="wrap" gap="6px">
+          <Flex
+            minH={{ base: "auto", sm: "35px" }}
+            justify="space-between"
+            align="center"
+            wrap="wrap"
+            gap="6px"
+          >
             <Text display={{ base: "none", sm: "block" }}>
               Serving Brantford for {businessInfo.yearsServing} years
             </Text>
@@ -140,10 +217,18 @@ export default function Header() {
               justify={{ base: "space-between", sm: "flex-end" }}
               fontSize={{ base: "12px", sm: "13px" }}
             >
-              <Link href={businessInfo.phone.href} color="#b8c8d9" _hover={{ color: "white" }}>
+              <Link
+                href={businessInfo.phone.href}
+                color="#b8c8d9"
+                _hover={{ color: "white" }}
+              >
                 ☎ {businessInfo.phone.display}
               </Link>
-              <Link href={businessInfo.email.href} color="#b8c8d9" _hover={{ color: "white" }}>
+              <Link
+                href={businessInfo.email.href}
+                color="#b8c8d9"
+                _hover={{ color: "white" }}
+              >
                 ✉ {businessInfo.email.display}
               </Link>
             </HStack>
@@ -163,7 +248,11 @@ export default function Header() {
       >
         <Container maxW="1160px" px={{ base: 4, md: 5 }}>
           <Flex minH="76px" align="center" justify="space-between">
-            <Link href="/" aria-label="PCT Brantford home" _hover={{ textDecoration: "none" }}>
+            <Link
+              href="/"
+              aria-label="PCT Brantford home"
+              _hover={{ textDecoration: "none" }}
+            >
               <Brand />
             </Link>
 
@@ -181,7 +270,9 @@ export default function Header() {
               fontSize="20px"
               fontWeight="700"
               onClick={() => setMenuOpen(!menuOpen)}
-              aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-label={
+                menuOpen ? "Close navigation menu" : "Open navigation menu"
+              }
               aria-expanded={menuOpen}
               _hover={{ bg: "#edf2f7", borderColor: "#cbd5e1" }}
               _active={{ bg: "#e2e8f0" }}
@@ -197,11 +288,7 @@ export default function Header() {
               color="#44546a"
             >
               {navItems.map(([href, label]) => {
-                const isActive =
-                  (href === "/" && window.location.pathname === "/") ||
-                  (href === "/services" && window.location.pathname === "/services") ||
-                  (href === "/about" && window.location.pathname === "/about");
-
+                const isActive = isPathActive(href);
                 return (
                   <Link
                     href={href}
@@ -209,12 +296,16 @@ export default function Header() {
                     _hover={{ color: navy, textDecoration: "none" }}
                     color={isActive ? "pct.700" : "#44546a"}
                     fontWeight={isActive ? "700" : "600"}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavigation(href);
+                    }}
                   >
                     {label}
                   </Link>
                 );
               })}
-              <ActionLink href="#contact" small>
+              <ActionLink href="/contact" small>
                 Book a Repair
               </ActionLink>
             </HStack>
@@ -232,31 +323,56 @@ export default function Header() {
                 boxShadow="0 22px 60px rgba(7,17,31,0.12)"
                 gap="4px"
               >
-                {navItems.map(([href, label]) => (
-                  <Link
-                    href={href}
-                    key={href}
-                    onClick={closeMenu}
-                    py="11px"
-                    px="14px"
-                    borderRadius="10px"
-                    fontSize="15px"
-                    fontWeight="600"
-                    color={navy}
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="space-between"
-                    _hover={{ bg: "#f0fdf9", color: "pct.700", textDecoration: "none" }}
-                  >
-                    <Text as="span">{label}</Text>
-                    <Text as="span" color="#a0aec0" fontSize="13px">
-                      →
-                    </Text>
-                  </Link>
-                ))}
-                <Box pt="12px" mt="6px" borderTop="1px solid" borderColor="#edf2f7">
+                {navItems.map(([href, label]) => {
+                  const isActive = isPathActive(href);
+
+                  return (
+                    <Link
+                      href={href}
+                      key={href}
+                      py="11px"
+                      px="14px"
+                      borderRadius="10px"
+                      fontSize="15px"
+                      fontWeight={isActive ? "700" : "600"}
+                      color={isActive ? "pct.700" : navy}
+                      bg={isActive ? "#f0fdf9" : "transparent"}
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="space-between"
+                      borderLeft="3px solid"
+                      borderLeftColor={isActive ? "pct.500" : "transparent"}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleNavigation(href);
+                        closeMenu();
+                      }}
+                      _hover={{
+                        bg: "#f0fdf9",
+                        color: "pct.700",
+                        textDecoration: "none",
+                      }}
+                    >
+                      <Text as="span">{label}</Text>
+
+                      <Text
+                        as="span"
+                        color={isActive ? "pct.500" : "#a0aec0"}
+                        fontSize="13px"
+                      >
+                        →
+                      </Text>
+                    </Link>
+                  );
+                })}
+                <Box
+                  pt="12px"
+                  mt="6px"
+                  borderTop="1px solid"
+                  borderColor="#edf2f7"
+                >
                   <VStack align="stretch" gap="10px">
-                    <ActionLink href="#contact" onClick={closeMenu} w="full">
+                    <ActionLink href="/contact" onClick={closeMenu} w="full">
                       Book a Repair <span>→</span>
                     </ActionLink>
                     <ActionLink
