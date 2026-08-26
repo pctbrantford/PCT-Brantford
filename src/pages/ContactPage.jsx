@@ -76,22 +76,21 @@ export default function ContactPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!formData.firstName.trim() || !formData.email.trim() || !formData.message.trim()) {
+      toaster.create({
+        title: "Required fields missing",
+        description: "Please fill in your first name, email, and problem description.",
+        type: "error",
+        duration: 4000,
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const result = await response.json().catch(() => null);
-
-      if (!response.ok) {
-        throw new Error(result?.message || `Failed to send message (Status ${response.status}).`);
-      }
+      // Simulate submission without making an API call
+      await new Promise((resolve) => setTimeout(resolve, 800));
 
       toaster.create({
         title: "Request sent successfully!",
@@ -115,7 +114,6 @@ export default function ContactPage() {
       toaster.create({
         title: "Unable to send request",
         description:
-          error.message ||
           "Something went wrong. Please try again or call us directly.",
         type: "error",
         duration: 5000,
