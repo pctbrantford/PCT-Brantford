@@ -89,8 +89,19 @@ export default function ContactPage() {
     setIsSubmitting(true);
 
     try {
-      // Simulate submission without making an API call
-      await new Promise((resolve) => setTimeout(resolve, 800));
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        throw new Error(result?.message || `Failed to send inquiry (Status ${response.status}).`);
+      }
 
       toaster.create({
         title: "Request sent successfully!",
@@ -114,6 +125,7 @@ export default function ContactPage() {
       toaster.create({
         title: "Unable to send request",
         description:
+          error.message ||
           "Something went wrong. Please try again or call us directly.",
         type: "error",
         duration: 5000,
