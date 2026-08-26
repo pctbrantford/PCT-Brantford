@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { hydrateRoot, createRoot } from "react-dom/client";
 import { ChakraProvider } from "@chakra-ui/react";
 import { HelmetProvider } from "react-helmet-async";
+import { AppToaster } from "./components/toaster";
 
 import App from "./App.jsx";
 import { system } from "./theme.js";
@@ -13,6 +14,7 @@ const fullApp = (
     <HelmetProvider>
       <ChakraProvider value={system}>
         <App />
+        <AppToaster />
       </ChakraProvider>
     </HelmetProvider>
   </StrictMode>

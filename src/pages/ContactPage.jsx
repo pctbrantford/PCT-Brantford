@@ -87,10 +87,10 @@ export default function ContactPage() {
         body: JSON.stringify(formData),
       });
 
-      const result = await response.json();
+      const result = await response.json().catch(() => null);
 
       if (!response.ok) {
-        throw new Error(result.message || "Failed to send message.");
+        throw new Error(result?.message || `Failed to send message (Status ${response.status}).`);
       }
 
       toaster.create({
