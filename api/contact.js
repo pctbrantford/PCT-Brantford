@@ -24,22 +24,70 @@ export default async function handler(req, res) {
     const customerName = `${firstName} ${lastName || ""}`.trim();
 
     const { data, error } = await resend.emails.send({
-      from: "Website Contact Form <website@nandanmaiya.in>",
-      to: ["nandanmaiya21@gmail.com"],
+      from: "Website Contact Form <website@nandanmaiya.in>", // change this to your verified sender email
+      to: ["nandanmaiya21@gmail.com"], // change this to your desired recipient email
       replyTo: email,
       subject: `New Repair Inquiry — ${customerName}`,
-
       html: `
-    <h2>New Repair Inquiry</h2>
-
-    <p><strong>Name:</strong> ${customerName}</p>
-    <p><strong>Email:</strong> ${email}</p>
-    <p><strong>Phone:</strong> ${phone || "Not provided"}</p>
-    <p><strong>Service:</strong> ${service || "Not specified"}</p>
-
-    <h3>Customer Message</h3>
-    <p>${message}</p>
-  `,
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="utf-8">
+          <style>
+            body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7fa; margin: 0; padding: 20px; color: #1e293b; }
+            .card { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+            .header { background-color: #07111f; padding: 28px 32px; border-bottom: 4px solid #25c7a7; }
+            .header h1 { color: #ffffff; margin: 0; font-size: 22px; letter-spacing: -0.02em; }
+            .header p { color: #25c7a7; margin: 4px 0 0 0; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+            .body { padding: 32px; }
+            .badge { display: inline-block; background-color: #e6fffa; color: #047857; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 9999px; text-transform: uppercase; margin-bottom: 20px; }
+            .field-group { margin-bottom: 20px; }
+            .label { font-size: 11px; text-transform: uppercase; font-weight: 700; color: #64748b; letter-spacing: 0.05em; margin-bottom: 4px; }
+            .value { font-size: 16px; font-weight: 600; color: #0f172a; }
+            .value a { color: #25c7a7; text-decoration: none; }
+            .divider { height: 1px; background-color: #e2e8f0; margin: 24px 0; }
+            .message-box { background-color: #f8fafc; border-left: 4px solid #07111f; padding: 16px 20px; border-radius: 0 8px 8px 0; font-size: 15px; line-height: 1.6; color: #334155; }
+            .footer { background-color: #f8fafc; padding: 20px 32px; font-size: 12px; color: #94a3b8; text-align: center; border-top: 1px solid #e2e8f0; }
+          </style>
+        </head>
+        <body>
+          <div class="card">
+            <div class="header">
+              <h1>Personal Computer Terminal</h1>
+              <p>New Repair Inquiry Received</p>
+            </div>
+            
+            <div class="body">
+              <div class="badge">Repair Request</div>
+              <div class="field-group">
+                <div class="label">Customer Name</div>
+                <div class="value">${customerName}</div>
+              </div>
+              <div class="field-group">
+                <div class="label">Email Address</div>
+                <div class="value"><a href="mailto:${email}">${email}</a></div>
+              </div>
+              <div class="field-group">
+                <div class="label">Phone Number</div>
+                <div class="value">${phone ? `<a href="tel:${phone}">${phone}</a>` : "Not provided"}</div>
+              </div>
+              <div class="field-group">
+                <div class="label">Service Requested</div>
+                <div class="value">${service || "Not specified"}</div>
+              </div>
+              <div class="divider"></div>
+              <div class="field-group">
+                <div class="label">Issue Description</div>
+                <div class="message-box">${message.replace(/\n/g, "<br>")}</div>
+              </div>
+            </div>
+            <div class="footer">
+              Sent automatically from the PCT Brantford website contact form.
+            </div>
+          </div>
+        </body>
+        </html>
+      `,
     });
 
     if (error) {
