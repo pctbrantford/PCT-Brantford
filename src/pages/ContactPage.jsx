@@ -115,6 +115,7 @@ export default function ContactPage() {
       toaster.create({
         title: "Unable to send request",
         description:
+          error.message ||
           "Something went wrong. Please try again or call us directly.",
         type: "error",
         duration: 5000,
