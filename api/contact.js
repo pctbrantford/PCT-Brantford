@@ -24,7 +24,7 @@ export default async function handler(req, res) {
     const customerName = `${firstName} ${lastName || ""}`.trim();
 
     const { data, error } = await resend.emails.send({
-      from: process.env.RESEND_FROM_EMAIL || "PCT Website <onboarding@resend.dev>",
+      from: process.env.RESEND_FROM_EMAIL || "PCT Website <nandanmaiya21@gmail.com>",
       to: [process.env.RESEND_TO_EMAIL || "nandanmaiya21@gmail.com"],
       replyTo: email,
       subject: `New Repair Inquiry — ${customerName}`,
