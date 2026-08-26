@@ -53,14 +53,14 @@ export default async function handler(req, res) {
       `,
     });
 
-    if (error) {
-      console.error("Resend error:", error);
+   if (error) {
+  console.error("Resend error:", error);
 
-      return res.status(500).json({
-        success: false,
-        message: "Unable to send your message.",
-      });
-    }
+  return res.status(500).json({
+    success: false,
+    message: error.message || "Unable to send your message.",
+  });
+}
 
     return res.status(200).json({
       success: true,
