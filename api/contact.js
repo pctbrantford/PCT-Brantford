@@ -11,14 +11,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const {
-      firstName,
-      lastName,
-      phone,
-      email,
-      service,
-      message,
-    } = req.body;
+    const { firstName, lastName, phone, email, service, message } = req.body;
 
     // Basic validation
     if (!firstName || !email || !message) {
@@ -31,36 +24,32 @@ export default async function handler(req, res) {
     const customerName = `${firstName} ${lastName || ""}`.trim();
 
     const { data, error } = await resend.emails.send({
-      from: "https://www.nandanmaiya.in/",
+      from: "Website Contact Form <website@nandanmaiya.in>",
       to: ["nandanmaiya21@gmail.com"],
       replyTo: email,
       subject: `New Repair Inquiry — ${customerName}`,
 
       html: `
-        <h2>New Repair Inquiry</h2>
+    <h2>New Repair Inquiry</h2>
 
-        <p><strong>Name:</strong> ${customerName}</p>
+    <p><strong>Name:</strong> ${customerName}</p>
+    <p><strong>Email:</strong> ${email}</p>
+    <p><strong>Phone:</strong> ${phone || "Not provided"}</p>
+    <p><strong>Service:</strong> ${service || "Not specified"}</p>
 
-        <p><strong>Email:</strong> ${email}</p>
-
-        <p><strong>Phone:</strong> ${phone || "Not provided"}</p>
-
-        <p><strong>Service:</strong> ${service || "Not specified"}</p>
-
-        <h3>Customer Message</h3>
-
-        <p>${message}</p>
-      `,
+    <h3>Customer Message</h3>
+    <p>${message}</p>
+  `,
     });
 
-   if (error) {
-  console.error("Resend error:", error);
+    if (error) {
+      console.error("Resend error:", error);
 
-  return res.status(500).json({
-    success: false,
-    message: error.message || "Unable to send your message.",
-  });
-}
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Unable to send your message.",
+      });
+    }
 
     return res.status(200).json({
       success: true,
