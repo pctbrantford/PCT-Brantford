@@ -23,9 +23,12 @@ export default async function handler(req, res) {
 
     const customerName = `${firstName} ${lastName || ""}`.trim();
 
+    const fromAddress = process.env.RESEND_FROM_EMAIL || "Website Contact Form <website@pctbrantford.com>";
+    const toAddress = process.env.RESEND_TO_EMAIL ? [process.env.RESEND_TO_EMAIL] : ["info@pctbrantford.com"];
+
     const { data, error } = await resend.emails.send({
-      from: "Website Contact Form <website@pctbrantford.com>", // change this to your verified sender email
-      to: ["info@pctbrantford.com"], // change this to your desired recipient email
+      from: fromAddress,
+      to: toAddress,
       replyTo: email,
       subject: `New Repair Inquiry — ${customerName}`,
       html: `
