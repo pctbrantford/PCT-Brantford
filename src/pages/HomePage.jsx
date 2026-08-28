@@ -398,7 +398,7 @@ export default function HomePage() {
                   my="28px"
                 >
                   <ActionLink>
-                    Book a Repair <span>→</span>
+                    Repair Inquiry <span>→</span>
                   </ActionLink>
                   <ActionLink href={businessInfo.phone.href} outline>
                     Call {businessInfo.phone.display}

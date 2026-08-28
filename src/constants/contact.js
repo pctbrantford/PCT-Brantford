@@ -24,7 +24,7 @@ export const ADDRESS = {
 export const BUSINESS_INFO = {
   name: "Personal Computer Terminal",
   initials: "PCT",
-  serviceLabel: "Computer Repair • IT Services",
+  serviceLabel: "Computer Repair • IT Services • Sales",
   yearsServing: "30+",
   phone: PHONE,
   email: EMAIL,
