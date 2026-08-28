@@ -24,8 +24,8 @@ export default async function handler(req, res) {
     const customerName = `${firstName} ${lastName || ""}`.trim();
 
     const { data, error } = await resend.emails.send({
-      from: "Website Contact Form <website@nandanmaiya.in>", // change this to your verified sender email
-      to: ["nandanmaiya21@gmail.com"], // change this to your desired recipient email
+      from: "Website Contact Form <website@pctbrantford.com>", // change this to your verified sender email
+      to: ["info@pctbrantford.com"], // change this to your desired recipient email
       replyTo: email,
       subject: `New Repair Inquiry — ${customerName}`,
       html: `
