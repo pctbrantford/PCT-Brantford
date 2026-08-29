@@ -17,7 +17,7 @@ import {
   Textarea,
   VStack,
 } from "@chakra-ui/react";
-import heroImage from "../../assets/home_page.avif";
+import heroImage from "../../assets/home_page.webp";
 import innerShopImage from "../../assets/pct_internal_view_of_store.avif";
 import pcImage from "../../assets/pc_bg_image.jpg";
 import custom_build_pc from "../../assets/custom_build_pc.jpg";

@@ -19,10 +19,14 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import innerShopImage from "../../assets/pct_internal_view_of_store.avif";
-import heroImage from "../../assets/home_page.avif";
+import heroImage from "../../assets/home_page.webp";
 import { businessInfo } from "../constants";
-import serviceImage from "../../assets/services.avif";
 import greatestTechnicianEverLivedImage from "../../assets/greatest_technician_ever_lived.avif";
+import shopEntranceImage from "../../assets/shop_entrance.webp";
+import shopInteriorImage from "../../assets/shop_front.webp";
+import shopWorkshopImage from "../../assets/shop_workshop.webp";
+import shopCounterImage from "../../assets/shop_counter.webp";
+import shopWaitingAreaImage from "../../assets/shop_waiting_area.webp";
 
 const navy = "#07111f";
 const mint = "#25c7a7";
@@ -162,7 +166,44 @@ function ContactDetail({ icon, label, value, href }) {
   );
 }
 
-const shopImages = [heroImage, serviceImage, greatestTechnicianEverLivedImage];
+const shopImages = [
+  {
+    src: shopEntranceImage,
+    alt: "Personal Computer Terminal storefront located at 340 Henry St, Brantford",
+    title: "Convenient Brantford Storefront",
+    subtitle: "Easy parking & quick drop-off service at 340 Henry St Unit #6",
+  },
+  {
+    src: shopCounterImage,
+    alt: "PCT Brantford service desk and customer check-in counter",
+    title: "Service Counter & Check-In",
+    subtitle: "Friendly local tech team ready to inspect your device & provide upfront quotes",
+  },
+  {
+    src: shopInteriorImage,
+    alt: "PCT Brantford shop interior with custom PC builds and refurbished computers",
+    title: "Store Interior & Product Display",
+    subtitle: "Browse laptops, desktop PCs, components & accessories",
+  },
+  {
+    src: greatestTechnicianEverLivedImage,
+    alt: "Personal Computer Terminal expert technician diagnosing computer hardware",
+    title: "Expert Bench Diagnostics",
+    subtitle: "Precision hardware troubleshooting, soldering & component-level repair",
+  },
+  {
+    src: shopWorkshopImage,
+    alt: "PCT Brantford fully equipped repair workshop and workbench",
+    title: "Full-Service Repair Workshop",
+    subtitle: "Screens, keyboards, batteries, liquid spill recovery & hardware upgrades",
+  },
+  {
+    src: shopWaitingAreaImage,
+    alt: "PCT Brantford comfortable waiting and consultation room",
+    title: "Welcoming Customer Lounge",
+    subtitle: "Comfortable environment where we explain repair options in plain English",
+  },
+];
 
 function ImageCarousel({ images }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -212,21 +253,26 @@ function ImageCarousel({ images }) {
         boxShadow="0 25px 70px rgba(20,45,70,.18)"
         userSelect="none"
       >
-        {images.map((image, index) => (
-          <Image
-            key={image}
-            src={image}
-            alt={`PCT Brantford ${index + 1}`}
-            position="absolute"
-            inset="0"
-            w="100%"
-            h="100%"
-            objectFit="cover"
-            loading="lazy"
-            opacity={index === currentIndex ? 1 : 0}
-            transition="opacity 0.8s ease-in-out"
-          />
-        ))}
+        {images.map((item, index) => {
+          const src = typeof item === "string" ? item : item.src;
+          const alt = typeof item === "string" ? `PCT Brantford ${index + 1}` : item.alt;
+          return (
+            <Image
+              key={src + index}
+              src={src}
+              alt={alt}
+              position="absolute"
+              inset="0"
+              w="100%"
+              h="100%"
+              objectFit="cover"
+              objectPosition="center"
+              loading="lazy"
+              opacity={index === currentIndex ? 1 : 0}
+              transition="opacity 0.8s ease-in-out"
+            />
+          );
+        })}
 
         {/* Gradient */}
         <Box
@@ -234,8 +280,8 @@ function ImageCarousel({ images }) {
           inset="0"
           bg="linear-gradient(
       180deg,
-      rgba(5,13,22,.05) 45%,
-      rgba(5,13,22,.45) 100%
+      rgba(5,13,22,.05) 30%,
+      rgba(5,13,22,.75) 100%
     )"
           pointerEvents="none"
         />
@@ -253,9 +299,43 @@ function ImageCarousel({ images }) {
           color="white"
           fontSize="11px"
           fontWeight="600"
+          zIndex="4"
         >
           {currentIndex + 1} / {images.length}
         </Flex>
+
+        {/* Slide Title & Description Overlay */}
+        {images[currentIndex] && typeof images[currentIndex] === "object" && images[currentIndex].title && (
+          <Box
+            position="absolute"
+            bottom={{ base: "28px", md: "34px" }}
+            left={{ base: "20px", md: "30px" }}
+            right={{ base: "20px", md: "30px" }}
+            pointerEvents="none"
+            zIndex="4"
+            maxW="600px"
+          >
+            <Text
+              color="white"
+              fontFamily="heading"
+              fontWeight="700"
+              fontSize={{ base: "16px", md: "20px" }}
+              textShadow="0 2px 10px rgba(0,0,0,0.8)"
+            >
+              {images[currentIndex].title}
+            </Text>
+            {images[currentIndex].subtitle && (
+              <Text
+                color="#cbd5e1"
+                fontSize={{ base: "12px", md: "14px" }}
+                textShadow="0 1px 6px rgba(0,0,0,0.8)"
+                mt="3px"
+              >
+                {images[currentIndex].subtitle}
+              </Text>
+            )}
+          </Box>
+        )}
 
         {/* Previous */}
         <IconButton
@@ -273,6 +353,7 @@ function ImageCarousel({ images }) {
           fontSize="20px"
           boxShadow="0 8px 25px rgba(0,0,0,.18)"
           onClick={previousImage}
+          zIndex="5"
           _hover={{
             bg: "white",
             transform: "translateY(-50%) scale(1.08)",
@@ -297,6 +378,7 @@ function ImageCarousel({ images }) {
           fontSize="20px"
           boxShadow="0 8px 25px rgba(0,0,0,.18)"
           onClick={nextImage}
+          zIndex="5"
           _hover={{
             bg: "white",
             transform: "translateY(-50%) scale(1.08)",
@@ -308,11 +390,12 @@ function ImageCarousel({ images }) {
         {/* Mobile dots */}
         <HStack
           position="absolute"
-          bottom="16px"
+          bottom="12px"
           left="50%"
           transform="translateX(-50%)"
           gap="6px"
           display={{ base: "flex", md: "none" }}
+          zIndex="5"
         >
           {images.map((_, index) => (
             <Box
@@ -346,35 +429,38 @@ function ImageCarousel({ images }) {
           },
         }}
       >
-        {images.map((image, index) => (
-          <Box
-            key={image}
-            flex="0 0 auto"
-            w="82px"
-            h="62px"
-            borderRadius="12px"
-            overflow="hidden"
-            cursor="pointer"
-            border="2px solid"
-            borderColor={index === currentIndex ? "pct.500" : "transparent"}
-            opacity={index === currentIndex ? 1 : 0.65}
-            transition="all .2s ease"
-            onClick={() => setCurrentIndex(index)}
-            _hover={{
-              opacity: 1,
-              transform: "translateY(-2px)",
-            }}
-          >
-            <Image
-              src={image}
-              alt={`PCT gallery thumbnail ${index + 1}`}
-              w="100%"
-              h="100%"
-              objectFit="cover"
-              loading="lazy"
-            />
-          </Box>
-        ))}
+        {images.map((item, index) => {
+          const src = typeof item === "string" ? item : item.src;
+          return (
+            <Box
+              key={src + index}
+              flex="0 0 auto"
+              w="82px"
+              h="62px"
+              borderRadius="12px"
+              overflow="hidden"
+              cursor="pointer"
+              border="2px solid"
+              borderColor={index === currentIndex ? "pct.500" : "transparent"}
+              opacity={index === currentIndex ? 1 : 0.65}
+              transition="all .2s ease"
+              onClick={() => setCurrentIndex(index)}
+              _hover={{
+                opacity: 1,
+                transform: "translateY(-2px)",
+              }}
+            >
+              <Image
+                src={src}
+                alt={`PCT gallery thumbnail ${index + 1}`}
+                w="100%"
+                h="100%"
+                objectFit="cover"
+                loading="lazy"
+              />
+            </Box>
+          );
+        })}
       </Flex>
     </Box>
   );

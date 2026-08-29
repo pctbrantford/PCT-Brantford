@@ -2,26 +2,49 @@ import { useState, useEffect } from "react";
 import { Box, Button, Flex, HStack, Image, Text } from "@chakra-ui/react";
 import greatestTechnicianImage from "../../assets/greatest_technician_ever_lived.avif";
 import servicesImage from "../../assets/services.avif";
-import heroImage from "../../assets/home_page.avif";
+import heroImage from "../../assets/home_page.webp";
+import shopEntranceImage from "../../assets/shop_entrance.webp";
+import shopCounterImage from "../../assets/shop_counter.webp";
+import shopInteriorImage from "../../assets/shop_front.webp";
+import shopWorkshopImage from "../../assets/shop_workshop.webp";
+import shopWaitingAreaImage from "../../assets/shop_waiting_area.webp";
 
 const carouselSlides = [
   {
+    src: shopEntranceImage,
+    alt: "Personal Computer Terminal storefront located at 340 Henry St, Brantford",
+    title: "Convenient Brantford Storefront",
+    subtitle: "Easy parking & quick drop-off service at 340 Henry St Unit #6",
+  },
+  {
+    src: shopCounterImage,
+    alt: "PCT Brantford service desk and customer check-in counter",
+    title: "Service Counter & Check-In",
+    subtitle: "Friendly local tech team ready to inspect your device & provide upfront quotes",
+  },
+  {
     src: greatestTechnicianImage,
-    alt: "Personal Computer Terminal expert technician diagnosing computer",
+    alt: "Personal Computer Terminal expert technician diagnosing computer hardware",
     title: "Expert Bench Diagnostics",
-    subtitle: "Precision hardware troubleshooting & repair",
+    subtitle: "Precision hardware troubleshooting, soldering & component-level repair",
   },
   {
-    src: servicesImage,
-    alt: "PCT Brantford professional computer repair services",
-    title: "Full-Service Computer Workshop",
-    subtitle: "Screens, keyboards, spills, boards & upgrades",
+    src: shopWorkshopImage,
+    alt: "PCT Brantford fully equipped repair workshop and workbench",
+    title: "Full-Service Repair Workshop",
+    subtitle: "Screens, keyboards, batteries, liquid spill recovery & hardware upgrades",
   },
   {
-    src: heroImage,
-    alt: "Technician repairing open laptop with precision tools",
+    src: shopWaitingAreaImage,
+    alt: "PCT Brantford comfortable waiting and consultation room",
+    title: "Welcoming Customer Lounge",
+    subtitle: "Comfortable environment where we explain repair options in plain English",
+  },
+  {
+    src: shopInteriorImage,
+    alt: "PCT Brantford shop interior with custom PC builds and refurbished computers",
     title: "30+ Years Local Heritage",
-    subtitle: "Brantford's trusted technology partner",
+    subtitle: "Brantford's trusted technology partner for sales, builds & repairs since 1992",
   },
 ];
 
@@ -39,7 +62,9 @@ export default function AboutCarousel() {
 
   const prevSlide = (e) => {
     e.stopPropagation();
-    setCurrentIndex((prev) => (prev === 0 ? carouselSlides.length - 1 : prev - 1));
+    setCurrentIndex((prev) =>
+      prev === 0 ? carouselSlides.length - 1 : prev - 1,
+    );
   };
 
   const nextSlide = (e) => {
@@ -71,7 +96,13 @@ export default function AboutCarousel() {
         boxShadow="0 15px 40px rgba(20,45,70,.14)"
         border="1px solid rgba(255,255,255,0.8)"
       >
-        <Text fontFamily="heading" fontSize="24px" fontWeight="700" color="#07111f" lineHeight="1">
+        <Text
+          fontFamily="heading"
+          fontSize="24px"
+          fontWeight="700"
+          color="#07111f"
+          lineHeight="1"
+        >
           30+
         </Text>
         <Text fontSize="11px" color="#6d7c8e" fontWeight="600" mt="2px">
@@ -109,6 +140,7 @@ export default function AboutCarousel() {
                 alt={slide.alt}
                 w="100%"
                 h="100%"
+                loading="lazy"
                 objectFit="cover"
                 transition="transform 0.6s ease"
                 _groupHover={{ transform: "scale(1.06)" }}
